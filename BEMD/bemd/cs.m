@@ -1,0 +1,21 @@
+A = imread('lena.jpg');
+[h,w,d]=size(A);
+R1=A(:,:,1);
+R1(:,:,2)=zeros(h,w);
+R1(:,:,3)=zeros(h,w);
+R=uint8(R1);
+G1(:,:,2)=A(:,:,2);
+G1(:,:,1)=zeros(h,w);
+G1(:,:,3)=zeros(h,w);
+G=uint8(G1);
+B1(:,:,3)=A(:,:,3);
+B1(:,:,2)=zeros(h,w);
+B1(:,:,1)=zeros(h,w);
+B=uint8(B1);
+figure
+subplot(1,3,1)
+imshow(R)
+subplot(1,3,2)
+imshow(G)
+subplot(1,3,3)
+imshow(B)
