@@ -1,0 +1,173 @@
+Hilbert变换的性质：
+
+1． 序列x(n)通过Hilbert变换器后，信号频谱的幅度不发生变化。这是因为Hilbert变换器是全通滤波器，引起频谱变化的只是其相位。
+
+
+2． 序列x(n)与其Hilbert变换^x(n)是正交的。
+
+
+
+
+下面通过例子说明两条性质：
+
+已知序列x(n)=cos(0.2*pi*n) 0<=n<20
+
+(1) 计算序列x(n)的Hilbert变换^x(n),并比较两序列频谱的变化。
+
+(2) 验证x(n)与^x(n)是正交的。
+
+(3) 余弦序列的Hilbert变换是正弦序列，则序列的Hilbert变换为^x(n)=sin(0.2*pi*n),试比较扩展函数yhilbert.m与函数hilbert.m对序列x(n)进行Hilbert变换的结果。
+
+
+MATLAB的实现程序如下：
+
+
+N=20;
+
+n=0:N-1;
+
+xn=cos(0.2*pi*n);
+
+hxn=hilbert(xn);
+
+%part 1
+
+%compare FFT[x(n)] and FFT[Hilbert[x(n)]]
+
+Xk=fft(xn);
+
+hXk=fft(hxn);
+
+aXk=abs(Xk);
+
+ahXk=abs(hXk);
+
+pXk=phase(Xk);
+
+phXk=phase(hXk);
+
+k=0:N-1;
+
+subplot(2,2,1),stem(k,aXk)
+
+xlabel('k');
+
+title('amplitude of FFT[x(n)]');
+
+subplot(2,2,2),stem(k,pXk)
+
+xlabel('k');
+
+title('phase of FFT[x(n)]');
+
+subplot(2,2,3),stem(k,ahXk)
+
+xlabel('k');
+
+title('amplitude of Hilbert[x(n)]');
+
+subplot(2,2,4),stem(k,phXk)
+
+xlabel('k');
+
+title('phase of FFT[Hilbertx(n)]');
+
+%part 2
+
+%method:if sum(xn.*hxn) is closely 0
+
+add=sum(xn.*hxn)
+
+%part 3:compare expansion function yhilbert.m and hilbert.m
+
+y=hilbert(xn);
+
+hxn
+
+sn=sin(0.2*pi*n)
+
+yn=imag(y)
+
+%Matlab画HHT三维时频图程序，希望能对大家有帮助
+imf=emd(x);% x 为原信号;
+[A,f,tt]=hhspectrum(imf);
+l1=length(tt);
+l2=length(A);
+A2=A;
+tt2=t;
+f2=f*fs;  %%% fs 是信号的采样频率，f2=f*fs，得到的f2才是信号本身的固有频率，
+       %%%但是在三维显示是会相对较大的偏差，因为乘以fs，相当于放大了fs倍数；
+       %%%若不想用fs,则以下fs皆改为f即可
+[m,n]=size(fs);
+for i=1:m-1
+     subplot(m,1,i)
+     stem3(tt2(1:l1),f2(i,1:l1),A(i,1:l1));
+     view(-37.5,30);
+    hold on
+end
+hold off
+
+EMD分解的IMF的边际谱
+[A,fa,tt]=hhspectrum(imf);[E,tt1]=toimage(A,fa,tt,length(tt));
+for k=1:size(E,1)
+bjp(k)=sum(E(k,:))*1/fs;
+end
+f=(0:N-3)/N*(fs/2);
+figure(2);
+plot(f,bjp);
+xlabel('频率/ Hz');
+ylabel('幅值');
+title('Hilbert 边际谱')
+试试这个行吗
+
+
+EMDclc
+clear all
+close all
+% 原始数据
+fs = 1000;
+ts = 1/fs;
+t=0:ts:0.3;
+z=2*sin(2*pi*10*t) + 5.*sin(2*pi*100*t);
+figure
+plot(t, z)
+title('原始信号')
+% EMD
+imf=emd(z);
+emd_visu(z,t,imf)
+[A,f,tt]=hhspectrum(imf);
+[im,tt]=toimage(A,f);
+disp_hhs(im);
+
+
+边际谱clc
+clear all
+close all
+% 原始数据
+fs = 1000;
+ts = 1/fs;
+t=0:ts:0.3;
+y=2*sin(2*pi*10*t);% + 5.*sin(2*pi*100*t);
+figure
+plot(t, y)
+title('原始信号')
+% 求Hilbert-Huang谱
+[A,fh,th] = hhspectrum(y);
+figure
+subplot(211)
+plot(th*ts, A)
+title('瞬时幅值') % 就是包络
+subplot(212)
+plot(th*ts, fh*fs)
+title('瞬时频率')
+% 显示结果
+[im,tt,ff] = toimage(A,fh,th);
+disp_hhs(im,tt)
+colormap(flipud(gray))
+% 编程实现显示
+figure
+imagesc(tt*ts,[0,0.5*fs],im);
+ylabel('frequency/Hz')
+set(gca,'YDir','normal')
+xlabel('time/s')
+title('Hilbert-Huang spectrum')

@@ -1,0 +1,79 @@
+时频分析工具箱中提供了计算各种线性时频表示和双线性时频分布的函数， 本帖主要列出时频分析工具箱函数简介，以号召大家就时频分析应用展开相关讨论。
+      一、信号产生函数：
+amexpo1s  单边指数幅值调制信号
+amexpo2s  双边指数幅值调制信号
+amgauss  高斯幅值调制信号
+amrect  矩形幅值调制信号
+amtriang  三角形幅值调制信号
+fmconst  定频调制信号
+fmhyp  双曲线频率调制信号
+fmlin  线性频率调制信号
+fmodany  任意频率调制信号
+fmpar  抛物线频率调制信号
+fmpower  幂指数频率调制信号
+fmsin 正弦频率调制信号
+gdpower 能量律群延迟信号
+altes 时域Altes信号
+anaask  幅值键移信号
+anabpsk  二进制相位键移信号
+anafsk  频率键移信号
+anapulse  单位脉冲信号的解析投影
+anaqpsk  四进制相位键移信号
+anasing  Lipscjitz 奇异性
+anaste  单位阶跃信号的解析投影
+atoms 基本高斯元的线性组合
+dopnoise  复多普勒任意信号
+doppler  复多普勒信号
+klauder  时域Klauder小波
+mexhat 时域墨西哥帽小波
+二、噪声产生函数
+noiseecg  解析复高斯噪声
+noiseecu  解析复单位高斯噪声
+tfrgabor  Gabor表示
+tfrstft  短时傅立叶变换
+ifestar2  使用AR(2)模型的瞬时频率估计
+instfreq  瞬时频率估计
+sqrpdlay  群延迟估计
+
+三、模糊函数
+ambifunb 窄带模糊函数
+ambifuwb  宽带模糊函数
+
+四、Affine类双核线性时频处理函数
+tfrbert  单式Bertrand分布
+tfrdfla  D-Flandrin分布
+tfrscalo  尺度图
+tfrspaw  平滑伪Affine类Wigner分布
+tfrunter  Unterberger分布
+五、Cohen类双核线性时频处理函数
+tfrbj  Born-Jordan分布
+tfrbud  Butterworth分布
+tfrcw  Choi-Williams分布
+tfrgrd  归一化的矩形分布
+tfrmh  Margenau-Hill分布
+tfrmhs  Margenau-Hill频谱分布
+tfrmmce  谱图的最小平均互熵组合
+tfrpage  Page分布
+tfrwv  伪Wigner-Ville分布
+tfrri  Rihaczek分布
+tfrridb  降低交叉项的分布（Bessel窗）
+tfrridbn  降低交叉项的分布（二项式窗）
+tfrridh  降低交叉项的分布（汉宁窗）
+tfrridt  降低交叉项的分布（三角窗）
+tfrsp  谱图分布
+tfrspwv  平滑伪Wigner-Ville分布
+tfrwv  Wigner-Ville分布
+tfrzam  Zhao-Atlas-Marks分布
+六、其他处理函数：
+friedman  瞬时频率密度
+htl  图像直线检测中的Hough变换
+margtfr  时频表示的能量
+momftfr  时频表示的频率矩
+momttfr  时频表示的时间矩
+renyi  Renyi信息度量
+ridges  波峰提取
+plotifl  绘制归一化的瞬时频率规律
+tfrparam  返回用于显示时频表示的参数
+tfrqview  时频表示的快速可视化
+tfrsave  保存时频表示的参数
+tfrview  时频表示的可视化
